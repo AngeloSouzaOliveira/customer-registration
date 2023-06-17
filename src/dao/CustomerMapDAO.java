@@ -37,6 +37,11 @@ public class CustomerMapDAO implements ICustomerDAO {
 
     @Override
     public void remove(Long cpf) {
+        Customer removerCustomer = this.map.get(cpf);
+        if(removerCustomer != null){
+            this.map.remove(removerCustomer.getCpf(), removerCustomer);
+            System.out.println("Customer remove sucess!");
+        }
 
     }
 
