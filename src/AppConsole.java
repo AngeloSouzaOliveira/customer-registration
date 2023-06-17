@@ -2,17 +2,22 @@ import dao.CustomerMapDAO;
 import dao.ICustomerDAO;
 import domain.Customer;
 
+import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class AppConsole {
     public static void main(String[] args) {
+
         ICustomerDAO customerMapDAO = new CustomerMapDAO();
 
         Scanner read = new Scanner(System.in);
-        Integer option = 0;
 
-        do{
-            print("*** Welcome to your customer register ***\n");
+        Integer option = 0;
+        Boolean loop = true;
+
+        print("*** Welcome to your customer register ***\n");
+        while (loop){
             print("Insert...\n" +
                     "1 - Register a customer\n" +
                     "2 - Consult a customer\n" +
@@ -21,84 +26,110 @@ public class AppConsole {
                     "5 - See all customers\n" +
                     "6 - Exit"
             );
-            option = read.nextInt();
 
-            switch (option){
-                case 1:
-                    print("Insira o nome do cliente:");
-                    String name = read.next();
-                    name += read.nextLine();
+                option = read.nextInt();
 
-                    print("Insira o cpf:");
-                    Long cpf = read.nextLong();
 
-                    print("Insira o telefone:");
-                    Long phone = read.nextLong();
+                switch (option){
+                    case 1:
+                        System.out.println("Enter customer name:");
+                        String name = read.next();
+                        name += read.nextLine();
 
-                    print("Insira o  endereço:");
-                    String address = read.next();
-                    address += read.nextLine();
+                        System.out.println("Enter customer CPF:");
+                        String textCpf = read.next().replaceAll("[^\\d\\s]", "");
+                        Long cpf = Long.parseLong(textCpf);
 
-                    print("Insira o número do numero:");
-                    Integer number = read.nextInt();
+                        System.out.println("Enter customer phone number:");
+                        String textPhone = read.next().replaceAll("[^\\d\\s]", "");
+                        Long phone = Long.parseLong(textPhone);
 
-                    print("Insira a cidade:");
-                    String city = read.next();
-                    city += read.nextLine();
+                        System.out.println("Enter customer address:");
+                        String address = read.next();
+                        address += read.nextLine();
 
-                    print("Insira o estado:");
-                    String state = read.next();
-                    state += read.nextLine();
+                        System.out.println("Enter customer house number:");
+                        String number = read.next();
+                        number += read.nextLine();
 
-                    Customer customer = new Customer(name, cpf, phone, address, number, city, state);
-                    customerMapDAO.register(customer);
+                        System.out.println("Enter customer city:");
+                        String city = read.next();
+                        city += read.nextLine();
 
-                    break;
+                        System.out.println("Enter customer state:");
+                        String state = read.next();
+                        state += read.nextLine();
 
-                case 2:
-                    print("Insirira o cpf do cliente:");
-                    Long cpfConsult = read.nextLong();
-                    customerMapDAO.consult(cpfConsult);
-                    break;
+                        Customer customer = new Customer(name, cpf, phone, address, number, city, state);
+                        customerMapDAO.register(customer);
 
-                case 3:
-                    print("Insira o nome do cliente:");
-                    String nameUpdate = read.next();
+                        break;
 
-                    print("Insira o telefone:");
-                    Long phoneUpdate = read.nextLong();
+                    case 2:
+                        System.out.println("Enter customer CPF to search:");
+                        String cpfTxtConsult = read.next().replaceAll("[^\\d\\s]", "");
+                        Long cpfConsult = Long.parseLong(cpfTxtConsult);
+                        customerMapDAO.consult(cpfConsult);
 
-                    print("Insira o  endereço:");
-                    String addressUpdate = read.next();
+                        break;
 
-                    print("Insira o número do numero:");
-                    Integer numberUpdate = read.nextInt();
+                    case 3:
+                        System.out.println("Enter customer name:");
+                        String nameUpdate = read.next();
+                        nameUpdate += read.nextLine();
 
-                    print("Insira a cidade:");
-                    String cityUpdate = read.next();
+                        Long phoneUpdate = null;
+                        System.out.println("Enter customer phone number:");
+                        String phoneTxtUpdate = read.next().replaceAll("[^\\d\\s]", "");
+                        phoneUpdate = Long.parseLong(phoneTxtUpdate);
 
-                    print("Insira o estado:");
-                    String stateUpdate = read.next();
 
-                    Customer customerUpdate = new Customer(nameUpdate, phoneUpdate, addressUpdate, numberUpdate, cityUpdate, stateUpdate);
-                    customerMapDAO.update(customerUpdate);
-                    break;
+                        if(phoneUpdate != null){
+                            System.out.println("Enter customer address:");
+                            String addressUpdate = read.next();
+                            addressUpdate += read.nextLine();
 
-                case 4:
-                    print("Insirira o cpf do cliente a ser removido:");
-                    Long cpfRemove = read.nextLong();
-                    customerMapDAO.remove(cpfRemove);
-                    break;
+                            System.out.println("Enter customer house number:");
+                            String numberUpdate = read.next();
+                            numberUpdate += read.nextLine();
 
-                case 5:
-                    print("Todos os clientes registrados:");
-                    customerMapDAO.allCustomers();
-                    break;
+                            System.out.println("Enter customer city:");
+                            String cityUpdate = read.next();
+                            cityUpdate += read.nextLine();
 
-                default:
-                    print("Invalid option!");
-            }
-        } while (option != 6);
+                            System.out.println("Enter customer state:");
+                            String stateUpdate = read.next();
+                            stateUpdate += read.nextLine();
+
+                            Customer customerUpdate = new Customer(nameUpdate, phoneUpdate, addressUpdate, numberUpdate, cityUpdate, stateUpdate);
+                            customerMapDAO.update(customerUpdate);
+                        }
+
+                        break;
+
+                    case 4:
+                        print("Enter customer CPF to remove:");
+                        String cpfTxtRemove = read.next().replaceAll("[^\\d\\s]", "");
+                        Long cpfRemove = Long.parseLong(cpfTxtRemove);
+                        customerMapDAO.remove(cpfRemove);
+                        break;
+
+                    case 5:
+                        print("All registered customers:");
+                        customerMapDAO.allCustomers();
+                        break;
+
+                    case 6:
+                        print("Exit to the program!");
+                        loop = false;
+                        break;
+
+                    default:
+                        print("Invalid option!");
+                }
+
+
+        }
     }
 
     public static void print(String value){

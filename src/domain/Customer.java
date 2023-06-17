@@ -7,11 +7,11 @@ public class Customer {
     private Long cpf;
     private Long phone;
     private String address;
-    private Integer number;
+    private String number;
     private String city;
     private String state;
 
-    public Customer(String name, Long cpf, Long phone, String address, Integer number, String city, String state) {
+    public Customer(String name, Long cpf, Long phone, String address, String number, String city, String state) {
         this.name = name;
         this.cpf = cpf;
         this.phone = phone;
@@ -21,7 +21,7 @@ public class Customer {
         this.state = state;
     }
 
-    public Customer(String name, Long phone, String address, Integer number, String city, String state) {
+    public Customer(String name, Long phone, String address, String number, String city, String state) {
         this.name = name;
         this.phone = phone;
         this.address = address;
@@ -62,11 +62,11 @@ public class Customer {
         this.address = address;
     }
 
-    public Integer getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(Integer number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 

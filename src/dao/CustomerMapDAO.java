@@ -15,18 +15,19 @@ public class CustomerMapDAO implements ICustomerDAO {
     @Override
     public Boolean register(Customer customer) {
         if (this.map.containsKey(customer.getCpf())) {
-            System.out.println("Customer already registered!");
+            System.out.println("Customer already registered!\n");
             return false;
         }
         this.map.put(customer.getCpf(), customer);
-        System.out.println("Customer registered sucess!");
+        System.out.println("Customer registered sucess!\n");
+
         return true;
     }
 
     @Override
     public Customer consult(Long cpf) {
         if(this.map.containsKey(cpf)){
-            System.out.println("Customer not registered!");
+            System.out.println("Customer not registered!\n");
         }
         Customer consultCustomer = this.map.get(cpf);
         return consultCustomer;
@@ -44,7 +45,7 @@ public class CustomerMapDAO implements ICustomerDAO {
             updateCustomer.setState(customer.getState().trim());
             System.out.println(updateCustomer);
         } else {
-            System.out.println("Customer not registered!");
+            System.out.println("Customer not registered!\n");
         }
 
     }
@@ -54,7 +55,7 @@ public class CustomerMapDAO implements ICustomerDAO {
         Customer removerCustomer = this.map.get(cpf);
         if(removerCustomer != null){
             this.map.remove(removerCustomer.getCpf(), removerCustomer);
-            System.out.println("Customer remove sucess!");
+            System.out.println("Customer remove sucess!\n");
         }
 
     }
