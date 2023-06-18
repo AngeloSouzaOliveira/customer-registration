@@ -27,23 +27,27 @@ public class CustomerMapDAO implements ICustomerDAO {
 
     @Override
     public Customer consult(Long cpf) {
-        return null;
+        if(this.map.containsKey(cpf)){
+            System.out.println("Customer not registered!");
+        }
+        Customer consultCustomer = this.map.get(cpf);
+        return consultCustomer;
     }
 
     @Override
     public void update(Customer customer) {
         Customer updateCustomer = this.map.get(customer.getCpf());
 
-        if(updateCustomer != null){
+        if(updateCustomer != null) {
             updateCustomer.setName(customer.getName());
-            updateCustomer.setCpf(customer.getCpf());
+            updateCustomer.setPhone(customer.getPhone());
             updateCustomer.setAddress(customer.getAddress());
             updateCustomer.setNumber(customer.getNumber());
             updateCustomer.setCity(customer.getCity());
             updateCustomer.setState(customer.getState().trim());
-            updateCustomer.setPhone(customer.getPhone());
-
             System.out.println(updateCustomer);
+        } else {
+            System.out.println("Customer not registered!");
         }
 
     }
