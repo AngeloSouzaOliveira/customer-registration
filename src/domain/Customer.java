@@ -21,6 +21,15 @@ public class Customer {
         this.state = state;
     }
 
+    public Customer(String name, Long phone, String address, Integer number, String city, String state) {
+        this.name = name;
+        this.phone = phone;
+        this.address = address;
+        this.number = number;
+        this.city = city;
+        this.state = state;
+    }
+
     public String getName() {
         return name;
     }

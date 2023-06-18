@@ -19,6 +19,7 @@ public class CustomerMapDAO implements ICustomerDAO {
             return false;
         }
         this.map.put(customer.getCpf(), customer);
+        System.out.println("Customer registered sucess!");
         return true;
     }
 
