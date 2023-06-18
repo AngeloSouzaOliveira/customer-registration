@@ -42,7 +42,8 @@ public class CustomerMapDAO implements ICustomerDAO {
             updateCustomer.setAddress(customer.getAddress());
             updateCustomer.setNumber(customer.getNumber());
             updateCustomer.setCity(customer.getCity());
-            updateCustomer.setState(customer.getState().trim());
+            updateCustomer.setState(customer.getState());
+            System.out.println("-> Client updated successfully:");
             System.out.println(updateCustomer);
         } else {
             System.out.println("Customer not registered!\n");

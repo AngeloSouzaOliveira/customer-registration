@@ -101,13 +101,14 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer: " +
-                "\n-name='" + name + '\'' +
-                ",\n-cpf=" + cpf +
-                ",\n-phone=" + phone +
-                ",\n-address='" + address + '\'' +
-                ",\n-number=" + number +
-                ",\n-city='" + city + '\'' +
-                ",\n-state='" + state + '\'';
+        return "----------------------" +
+                "\n-name: " + name +
+                "\n-cpf: " + cpf +
+                "\n-phone: " + phone +
+                "\n-address: " + address +
+                "\n-number: " + number +
+                "\n-city: " + city +
+                "\n-state: " + state +
+                "\n---------------------- \n";
     }
 }

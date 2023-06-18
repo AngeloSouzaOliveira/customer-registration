@@ -69,41 +69,45 @@ public class AppConsole {
                         System.out.println("Enter customer CPF to search:");
                         String cpfTxtConsult = read.next().replaceAll("[^\\d\\s]", "");
                         Long cpfConsult = Long.parseLong(cpfTxtConsult);
-                        customerMapDAO.consult(cpfConsult);
-
+                        Customer consultCustomer = customerMapDAO.consult(cpfConsult);
+                        if (consultCustomer != null) {
+                            System.out.println("Consulted customer details:\n" + consultCustomer);
+                        } else {
+                            System.out.println("Customer not found.");
+                        }
                         break;
 
                     case 3:
-                        System.out.println("Enter customer name:");
+                        System.out.println("Enter the cpf of the customer to be updated:");
+                        String cpfTxtUpdate = read.next().replaceAll("[^\\d\\s]", "");
+                        Long cpfUpdate = Long.parseLong(cpfTxtUpdate);
+
+                        System.out.println("Enter new customer name:");
                         String nameUpdate = read.next();
                         nameUpdate += read.nextLine();
 
-                        Long phoneUpdate = null;
-                        System.out.println("Enter customer phone number:");
+                        System.out.println("Enter new customer phone number:");
                         String phoneTxtUpdate = read.next().replaceAll("[^\\d\\s]", "");
-                        phoneUpdate = Long.parseLong(phoneTxtUpdate);
+                        Long phoneUpdate = Long.parseLong(phoneTxtUpdate);
 
+                        System.out.println("Enter new customer address:");
+                        String addressUpdate = read.next();
+                        addressUpdate += read.nextLine();
 
-                        if(phoneUpdate != null){
-                            System.out.println("Enter customer address:");
-                            String addressUpdate = read.next();
-                            addressUpdate += read.nextLine();
+                        System.out.println("Enter new customer house number:");
+                        String numberUpdate = read.next();
+                        numberUpdate += read.nextLine();
 
-                            System.out.println("Enter customer house number:");
-                            String numberUpdate = read.next();
-                            numberUpdate += read.nextLine();
+                        System.out.println("Enter new customer city:");
+                        String cityUpdate = read.next();
+                        cityUpdate += read.nextLine();
 
-                            System.out.println("Enter customer city:");
-                            String cityUpdate = read.next();
-                            cityUpdate += read.nextLine();
+                        System.out.println("Enter new customer state:");
+                        String stateUpdate = read.next();
+                        stateUpdate += read.nextLine();
 
-                            System.out.println("Enter customer state:");
-                            String stateUpdate = read.next();
-                            stateUpdate += read.nextLine();
-
-                            Customer customerUpdate = new Customer(nameUpdate, phoneUpdate, addressUpdate, numberUpdate, cityUpdate, stateUpdate);
-                            customerMapDAO.update(customerUpdate);
-                        }
+                        Customer customerUpdate = new Customer(nameUpdate,cpfUpdate, phoneUpdate, addressUpdate, numberUpdate, cityUpdate, stateUpdate);
+                        customerMapDAO.update(customerUpdate);
 
                         break;
 
@@ -115,8 +119,17 @@ public class AppConsole {
                         break;
 
                     case 5:
-                        print("All registered customers:");
-                        customerMapDAO.allCustomers();
+
+                        if(customerMapDAO.allCustomers().size() <= 0){
+                            print("There are no registered customers!");
+                        } else {
+                            print("All registered customers:");
+                            for (Customer aloneCustomer : customerMapDAO.allCustomers()){
+                                print(String.valueOf(aloneCustomer));
+
+                            }
+                        }
+
                         break;
 
                     case 6:
