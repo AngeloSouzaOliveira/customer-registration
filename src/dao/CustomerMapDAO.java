@@ -14,14 +14,11 @@ public class CustomerMapDAO implements ICustomerDAO {
 
     @Override
     public Boolean register(Customer customer) {
-
         if (this.map.containsKey(customer.getCpf())) {
             System.out.println("Customer already registered!");
             return false;
         }
-
         this.map.put(customer.getCpf(), customer);
-
         return true;
     }
 
@@ -37,7 +34,6 @@ public class CustomerMapDAO implements ICustomerDAO {
     @Override
     public void update(Customer customer) {
         Customer updateCustomer = this.map.get(customer.getCpf());
-
         if(updateCustomer != null) {
             updateCustomer.setName(customer.getName());
             updateCustomer.setPhone(customer.getPhone());
@@ -64,6 +60,6 @@ public class CustomerMapDAO implements ICustomerDAO {
 
     @Override
     public Collection<Customer> allCustomers() {
-        return null;
+        return this.map.values();
     }
 }
