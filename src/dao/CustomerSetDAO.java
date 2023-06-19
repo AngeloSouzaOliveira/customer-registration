@@ -52,11 +52,23 @@ public class CustomerSetDAO implements ICustomerDAO{
 
     @Override
     public Boolean remove(Long cpf) {
-        return null;
+        if(cpf != null){
+            Customer customer = consult(cpf);
+            if(customer != null){
+                set.remove(customer);
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
     }
 
     @Override
     public Collection<Customer> allCustomers() {
-        return null;
+        for (Customer customer : this.set) {
+            System.out.println(customer);
+        }
+        return this.set;
     }
 }
