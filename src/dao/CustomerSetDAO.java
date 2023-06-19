@@ -47,7 +47,19 @@ public class CustomerSetDAO implements ICustomerDAO{
 
     @Override
     public Boolean update(Customer customer) {
-        return null;
+        if(customer.getCpf() != null){
+            Customer customerFound = consult(customer.getCpf());
+            if(customerFound != null){
+                customerFound.setName(customer.getName());
+                customerFound.setPhone(customer.getPhone());
+                customerFound.setAddress(customer.getAddress());
+                customerFound.setNumber(customer.getNumber());
+                customerFound.setCity(customer.getCity());
+                customerFound.setState(customer.getState());
+                return true;
+            }
+        }
+        return  false;
     }
 
     @Override
