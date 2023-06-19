@@ -7,6 +7,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class AppConsole {
+
     public static void main(String[] args) {
 
         ICustomerDAO customerMapDAO = new CustomerMapDAO();

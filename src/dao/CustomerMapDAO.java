@@ -34,7 +34,7 @@ public class CustomerMapDAO implements ICustomerDAO {
     }
 
     @Override
-    public void update(Customer customer) {
+    public Boolean update(Customer customer) {
         Customer updateCustomer = this.map.get(customer.getCpf());
         if(updateCustomer != null) {
             updateCustomer.setName(customer.getName());
@@ -45,20 +45,24 @@ public class CustomerMapDAO implements ICustomerDAO {
             updateCustomer.setState(customer.getState());
             System.out.println("-> Client updated successfully:");
             System.out.println(updateCustomer);
+            return true;
+
         } else {
             System.out.println("Customer not registered!\n");
+            return false;
         }
-
     }
 
     @Override
-    public void remove(Long cpf) {
+    public Boolean remove(Long cpf) {
         Customer removerCustomer = this.map.get(cpf);
         if(removerCustomer != null){
             this.map.remove(removerCustomer.getCpf(), removerCustomer);
             System.out.println("Customer remove sucess!\n");
+            return true;
+        } else {
+            return false;
         }
-
     }
 
     @Override
