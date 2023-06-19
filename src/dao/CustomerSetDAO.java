@@ -4,6 +4,7 @@ import domain.Customer;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 public class CustomerSetDAO implements ICustomerDAO{
@@ -16,12 +17,32 @@ public class CustomerSetDAO implements ICustomerDAO{
 
     @Override
     public Boolean register(Customer customer) {
-        return null;
+        if(customer != null){
+            set.add(customer);
+            return true;
+        } else{
+            return false;
+        }
+
     }
 
     @Override
     public Customer consult(Long cpf) {
-        return null;
+        if(cpf != null){
+            Customer customerFound = null;
+            Iterator<Customer> customerIterator = set.iterator();
+
+            while (customerIterator.hasNext()){
+                Customer customerConsul = customerIterator.next();
+                if(customerConsul.getCpf().equals(cpf)){
+                    customerFound = customerConsul;
+                }
+            }
+            return customerFound;
+
+        } else {
+            return null;
+        }
     }
 
     @Override

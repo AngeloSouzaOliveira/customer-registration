@@ -29,6 +29,10 @@ public class Customer {
         this.city = city;
         this.state = state;
     }
+    public Customer() {
+
+    }
+
 
     public String getName() {
         return name;
